@@ -1,35 +1,40 @@
-.mainColl{
-  width: 33.33%;
-  margin-left: 33.33%;
-}
-
-
-
-
 
 
 .likeContainer{
   width: 100%;
+  
 
 }
 .likesNumber{
-  float: left;
   height: 50px;
-  width: 50px;
-  font-size: 20px;
+  width: auto;
+  font-size: 18px;
   padding-top: 10px;
   text-align: right;
+  float: left;
+  color: #9c9c9c;
+  letter-spacing: -1px;
+  margin-top: 1px;
+  
 }
 .heart {
     cursor: pointer;
     height: 50px;
     width: 50px;
-    margin-left: 50px;
+    float: left;
     background-image:url( 'https://abs.twimg.com/a/1446542199/img/t1/web_heart_animation.png');
     background-position: left;
     background-repeat:no-repeat;
     background-size:2900%;
+    
  
+  }
+  .posButtons{
+    font-size: 18px;
+    height: 50px;
+    width: 50px;
+    padding-top:10px;
+    color: #aab8c2;  
   }
   
   .heart:hover {
@@ -44,15 +49,51 @@
     from {background-position:left;}
     to { background-position:right;}
   }
+.tweet{
+  background-color: violet;
+}
+
+.grid-container-tweet {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "boxTweet";
+  border:1px solid #d6d6d6;
+  border-top: none;
+  padding-top: 1vh;
+  transition: 0.2s;
+}
+.boxTweet {
+  display: grid;
+  grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 0.5fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "profilePic usernameData usernameData usernameData usernameData"
+    ". tweetContent tweetContent tweetContent tweetContent"
+    ". tweetContent tweetContent tweetContent tweetContent"
+    ". firstButton secondButton thirdButton fourthButton";
+  grid-area: boxTweet;
+
+}
+.grid-container-tweet:hover {
+  background-color: #fafafa;
+
+}
+.profilePic { grid-area: profilePic; }
+.usernameData { grid-area: usernameData; }
+.firstButton { grid-area: firstButton; }
+.secondButton { grid-area: secondButton; }
+.thirdButton { grid-area: thirdButton; }
+.fourthButton { grid-area: fourthButton; }
+.tweetContent { grid-area: tweetContent; }
+.tweetContent { 
+  grid-area: tweetContent; 
+  padding-top: 1vh;
+  padding-right: 1vw;
+}
 
 
-
-
-
-
-@media (min-width:770px){
-
-
-  
-  }
   

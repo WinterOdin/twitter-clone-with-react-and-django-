@@ -22,9 +22,14 @@
       padding-bottom: 5px;
       border-top: 1px solid #dbdbdb;
       color: #424242;
+      background-color: white;
   }
   .leftCol{
       display: none;
+  }
+  .mainColl{
+    width: 90%;
+    margin-left: 5%;
   }
 
   @media (min-width:770px){
@@ -34,6 +39,10 @@
     .leftCol{
         display: block;
         width: 33.33%;
+    }
+    .mainColl{
+      width: 33.33%;
+      margin-left: 33.33%;
     }
     .grid-container-left {
         display: grid;
@@ -98,3 +107,27 @@
         color: white;
     }
 }
+/*
+@media (max-width:1040px){
+  .hoverStyllePc,.hoverStylleLogo{
+    font-size: 21px;
+    padding:6px 6px 6px 6px;
+    width: 100%;
+    margin-left: 0%;
+
+  }
+  .grid-container-left {
+    width: 18% ;
+    margin-left:15.33% ;
+  }
+}
+@media (max-width:1440px){
+
+  .hoverStyllePc,.hoverStylleLogo{
+    font-size: 22px;
+    padding:6px 6px 6px 6px;
+    width: 65%;
+    margin-left: 10%;
+  }
+}
+*/
