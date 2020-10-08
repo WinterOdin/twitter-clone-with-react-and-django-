@@ -13,7 +13,7 @@ def home(request):
 def tweet_list(request):
 
     data_set    = Tweets.objects.all()
-    data_set_list =  [{ "id": x.id, "content" : x.content} for x in data_set ]
+    data_set_list =  [{ "id": x.id, "content" : x.content, "likes":12} for x in data_set ]
     context = {
         "response" : data_set_list
     }

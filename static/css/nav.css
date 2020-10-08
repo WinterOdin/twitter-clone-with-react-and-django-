@@ -1,0 +1,100 @@
+.grid-container-nav-mobile {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+      "tile1 tile2 tile3";
+    width: 100%;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    z-index: 1000;
+  }
+  .tile1 { grid-area: tile1; }
+  .tile2 { grid-area: tile2; }
+  .tile3 { grid-area: tile3; }
+
+  .tilesStyle{
+      text-align: center;
+      font-size: 25px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      border-top: 1px solid #dbdbdb;
+      color: #424242;
+  }
+  .leftCol{
+      display: none;
+  }
+
+  @media (min-width:770px){
+    .grid-container-nav-mobile {
+        display: none;
+      }
+    .leftCol{
+        display: block;
+        width: 33.33%;
+    }
+    .grid-container-left {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        gap: 0px 0px;
+        grid-template-areas:
+          "logoTile"
+          "tile4"
+          "tile5"
+          "tile6"
+          "tile7"
+          "tile8"
+          "tile9";
+        width: 15%;
+        margin-left:18.33% ;
+        overflow: hidden;
+        position: fixed;
+        
+        z-index: 1000;
+      }
+    .logoTile { grid-area: logoTile;}  
+    .tile4 { grid-area: tile4; }
+    .tile5 { grid-area: tile5; }
+    .tile6 { grid-area: tile6; }
+    .tile7 { grid-area: tile7; }
+    .tile8 { grid-area: tile8; }
+    .tile9 { grid-area: tile9; }
+    .tileStylePC{
+        height: 7vh;
+    }
+    .hoverStyllePc,.hoverStylleLogo{
+        font-size: 22px;
+        height: auto;
+        color: black;
+        padding:10px 6px 6px 10px;
+        border-radius: 20px;
+        width: 60%;
+        text-align: left;
+        margin-left: 10%;
+        font-family: 'Roboto', sans-serif;
+    }
+    .hoverStyllePc:hover{
+        background-color:#e8f5fe;
+        color:#1da1f2 ;
+    }
+    .hoverStylleLogo{
+        font-size: 37px;
+        color: #1da1f2;
+    }
+    .tweetBTN{
+        background-color:#1da1f2 ;
+        width: 80%;
+        margin-left: 10%;
+        border-radius: 25px;
+        text-align: center;
+        font-size: 17px;
+        font-family: 'Roboto', sans-serif;
+        padding-top: 15px;
+        font-weight: 500;
+        padding-bottom: 15px;
+        color: white;
+    }
+}
