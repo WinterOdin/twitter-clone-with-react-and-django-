@@ -2,9 +2,12 @@
 {% block content %}
 
 
-
+  
 <div class="mainColl">
-    <div id='tweets'>
+    <div class="boxName">
+        Main
+    </div>
+    <div id='tweets'> 
 
     </div>
 </div>
@@ -42,7 +45,7 @@ function LikeBtn(tweet){
 function formatedTweetsElement(tweet){
     var formatedTweet = //"<div class='mb-4 tweet' id='tweet-" + tweet.id + "'>" + 
         //"+LikeBtn(tweet)+"
-        "<div class='grid-container-tweet'><div class='boxTweet'><div class='profilePic'></div><div class='usernameData'>@JohnyDeep21</div><div class='firstButton'><div class='posButtons'><i class='fas fa-comment'></i></div></div><div class='secondButton'><div class='posButtons'><i class='fas fa-retweet'></i></div></div><div class='thirdButton'>"+LikeBtn(tweet)+"</div><div class='fourthButton'><div class='posButtons'></div></div><div class='tweetContent'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eget erat condimentum tellus sodales pretium. Duis nec velit cursus, iaculis ex vitae, fermentum magna. Nullam facilisis turpis vitae tempus sagittis.</div></div></div>"
+        "<div class='grid-container-tweet'><div class='boxTweet'><div class='profilePic'></div><div class='usernameData'>@JohnyDeep21</div><div class='firstButton'><div class='posButtons'><i class='fas fa-comment'></i></div></div><div class='secondButton'><div class='posButtons'><i class='fas fa-retweet'></i></div></div><div class='thirdButton'>"+LikeBtn(tweet)+"</div><div class='fourthButton'><div class='posButtons'><i class='fas fa-chevron-up'></i></div></div><div class='tweetContent'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eget erat condimentum tellus sodales pretium. Duis nec velit cursus, iaculis ex vitae, fermentum magna. Nullam facilisis turpis vitae tempus sagittis.</div></div></div>"
                 
      //"</div>"
     return formatedTweet

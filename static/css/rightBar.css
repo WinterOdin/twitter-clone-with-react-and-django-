@@ -1,0 +1,129 @@
+.rightCol{
+    display:none;
+}
+
+@media (min-width:770px){
+
+    .rightCol{
+        display:block;
+        margin-left: calc(33.33% * 2);
+    }
+    .grid-container-ppl {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.5fr 1fr 1fr;
+        gap: 0px 0px;
+        grid-template-areas:
+          "searchBar"
+          "pplBar"
+          "pplBar";
+        background-color:white;
+        width: 33.33%;
+        height:auto;
+        
+        overflow: hidden;
+        position: fixed;
+        z-index: 1000;
+      }
+    .searchBar { grid-area: searchBar; }
+    .pplBar {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 0px 0px;
+        grid-template-areas:
+          "pplContainer pplContainer pplContainer pplContainer"
+          "pplContainer pplContainer pplContainer pplContainer";
+        grid-area: pplBar;
+
+        max-width: 60%;
+        margin-left: 4%;
+    }
+    .pplContainer {
+        display: grid;
+        grid-template-columns: 0.5fr 1fr 1fr;
+        grid-template-rows: 0.5fr 1fr 1fr 1fr 0.5fr;
+        gap: 0px 0px;
+        grid-template-areas:
+          "ppBarName ppBarName ppBarName"
+          "person1 person1 person1"
+          "person2 person2 person2"
+          "person3 person3 person3"
+          "showMore showMore showMore";
+        grid-area: pplContainer;
+
+        width: 96%;
+        margin-left: 2%;
+      }
+      .ppBarName { grid-area: ppBarName; }
+      .showMore { grid-area: showMore; }
+      .person1 {
+        display: grid;
+        grid-template-columns: 0.5fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 0px 0px;
+        grid-template-areas:
+          "picPerson1 namePerson1 buttonPerson1"
+          "picPerson1 namePerson1 buttonPerson1";
+        grid-area: person1;
+        border:1px solid  #edf0f2;
+        border-left: none;
+        border-right: none;
+      }
+      .picPerson1 { grid-area: picPerson1; }
+      .namePerson1 { grid-area: namePerson1; }
+      .buttonPerson1 { grid-area: buttonPerson1; }
+      .person2 {
+        display: grid;
+        grid-template-columns: 0.5fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 0px 0px;
+        grid-template-areas:
+          "picPerson2 namePerson2 buttonPerson2"
+          "picPerson2 namePerson2 buttonPerson2";
+        grid-area: person2;
+      }
+      .picPerson2 { grid-area: picPerson2; }
+      .namePerson2 { grid-area: namePerson2; }
+      .buttonPerson2 { grid-area: buttonPerson2; }
+      .person3 {
+        display: grid;
+        grid-template-columns: 0.5fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 0px 0px;
+        grid-template-areas:
+          "picPerson3 namePerson3 buttonPerson3"
+          "picPerson3 namePerson3 buttonPerson3";
+        grid-area: person3;
+        border:1px solid #edf0f2;;
+        border-left: none;
+        border-right: none;
+      }
+      .picPerson3 { grid-area: picPerson3; }
+      .namePerson3 { grid-area: namePerson3; }
+      .buttonPerson3 { grid-area: buttonPerson3; }
+
+      .person1,.person2,.person3{
+          width: 100%;
+          height: 10vh;
+          background-color: #f5f8fa;
+      }
+      .person1:hover,.person2:hover,.person3:hover{
+ 
+        background-color: #edf0f2;
+    }
+      .showMore,.ppBarName{
+          width: 100%;
+          height: 100%;
+          background-color: #f5f8fa;
+      }
+      .showMore{
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px;
+      }
+      .ppBarName{
+        border-top-left-radius: 25px;
+        border-top-right-radius: 25px;
+      }
+
+}
