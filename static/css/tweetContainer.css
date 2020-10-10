@@ -1,0 +1,75 @@
+
+.grid-container-tweet-container{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+      "boxForm";
+    width: 100%;
+    height: 20vh;
+    border:  1px solid  #edf0f2;
+    border-top: none;
+  }
+  .boxForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+      "userPic formTextarea formTextarea formTextarea formTextarea formTextarea"
+      ". formTextarea formTextarea formTextarea formTextarea formTextarea"
+      ". otherButtons otherButtons otherButtons buttonTweet buttonTweet";
+    grid-area: boxForm;
+  }
+  .userPic { 
+    grid-area: userPic;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    }
+  .formTextarea {
+    grid-area: formTextarea;
+    width: 95%;
+  }
+  .buttonTweet {
+    grid-area: buttonTweet;
+    width: 100%;
+
+  }
+  .otherButtons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 0.5fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+      ". . ."
+      ". . ."
+      ". . .";
+    grid-area: otherButtons;
+  }
+
+  .buttonFormStyle{
+    background-color: rgb(29, 161, 242);
+    font-family: 'Roboto', sans-serif;
+    width: 70%;
+    margin-left: 5%;
+    padding: 5px 3px 5px 3px;
+    color: white;
+    border-radius: 25px;
+    outline: none;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 5%;
+
+  }
+  .textareaStyle{
+    width: 100%;
+    height: 90%;
+    margin-top: 4%;
+    border: none;
+    color:#1f1f1f
+}
+.textareaStyle:focus{
+    outline: none;
+}

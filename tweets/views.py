@@ -1,14 +1,26 @@
-from django.shortcuts import render
-from .models import Tweets
 from django.http import HttpResponse, Http404, JsonResponse
+from django.shortcuts import render
 
+
+
+from .models import *
+from .forms import *
 
 
 # Create your views here.
 def home(request):
-
     return render(request, "pages/index.html", status=200)
 
+def tweet_create(request): 
+    
+    form = TweetForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        form = TweetForm()
+    context = {
+        "form" : form,
+    }
+    return render( request, 'components/forms.html', context)
 
 def tweet_list(request):
 

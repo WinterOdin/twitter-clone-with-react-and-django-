@@ -29,8 +29,8 @@
       display: none;
   }
   .mainColl{
-    width: 90%;
-    margin-left: 5%;
+    width: 98%;
+    margin-left: 1%;
   }
   .boxName{
     width: 100%;
@@ -39,9 +39,10 @@
     color: black;
     font-size: 25px;
     font-weight: 900;
-    padding:20px 6px 6px 10px;
     border:1px solid #edf0f2;
     border-top: none;
+    padding-top: 2%;
+    padding-left: 2%;
   }
   @media (min-width:770px){
    

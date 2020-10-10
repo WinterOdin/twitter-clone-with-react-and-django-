@@ -10,8 +10,7 @@
   float: left;
   color: #9c9c9c;
   letter-spacing: -1px;
-  margin-top: 1px;
-  
+  margin-top: 1px; 
 }
 .heart {
     cursor: pointer;
@@ -22,8 +21,6 @@
     background-position: left;
     background-repeat:no-repeat;
     background-size:2900%;
-    
- 
   }
   .posButtons{
     font-size: 18px;
@@ -63,8 +60,8 @@
 }
 .boxTweet {
   display: grid;
-  grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 0.5fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 0.5fr auto auto  1fr;
   gap: 0px 0px;
   grid-template-areas:
     "profilePic usernameData usernameData usernameData usernameData"
@@ -72,11 +69,9 @@
     ". tweetContent tweetContent tweetContent tweetContent"
     ". firstButton secondButton thirdButton fourthButton";
   grid-area: boxTweet;
-
 }
 .grid-container-tweet:hover {
   background-color: #fafafa;
-
 }
 .profilePic { grid-area: profilePic; }
 .usernameData { grid-area: usernameData; }
@@ -89,6 +84,7 @@
   grid-area: tweetContent; 
   padding-top: 1vh;
   padding-right: 1vw;
+  height: auto;
 }
 
 

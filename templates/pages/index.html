@@ -7,6 +7,24 @@
     <div class="boxName">
         Main
     </div>
+    <form>
+        <div class="grid-container-tweet-container">
+            <div class="boxForm">
+                <div class="userPic"></div>
+                <div class="formTextarea">
+                    <textarea placeholder="Describe yourself here..." style="resize:none" class="textareaStyle" name="content" ></textarea>
+                </div>
+                <div class="buttonTweet">
+                    <div class="tweetButtonForm">
+                        <button type="submit" class="buttonFormStyle">Tweet</button>
+                    </div>
+                </div>
+                
+                <div class="otherButtons"></div>
+            </div>
+        </div>
+    </form>
+ 
     <div id='tweets'> 
 
     </div>
@@ -35,19 +53,12 @@ function handleDidLike(tweet_id, currentCount){
 
 function LikeBtn(tweet){
     return "<div class='likeContainer'><div class='heart' onclick=handleDidLike("+tweet.id+","+ tweet.likes+")></div><div class='likesNumber'>"+ tweet.likes+"</div></div>"
-    
    
 }
 
-
- //"<div class='likeContainer'><div class='likesNumber'>"+ tweet.likes+"</div><div class='heart' onclick=handleDidLike("+tweet.id+","+ tweet.likes+")></div></div>"
- //"<div class='heart' onclick=handleDidLike("+tweet.id+","+ tweet.likes+")>xD</div>"
 function formatedTweetsElement(tweet){
-    var formatedTweet = //"<div class='mb-4 tweet' id='tweet-" + tweet.id + "'>" + 
-        //"+LikeBtn(tweet)+"
-        "<div class='grid-container-tweet'><div class='boxTweet'><div class='profilePic'></div><div class='usernameData'>@JohnyDeep21</div><div class='firstButton'><div class='posButtons'><i class='fas fa-comment'></i></div></div><div class='secondButton'><div class='posButtons'><i class='fas fa-retweet'></i></div></div><div class='thirdButton'>"+LikeBtn(tweet)+"</div><div class='fourthButton'><div class='posButtons'><i class='fas fa-chevron-up'></i></div></div><div class='tweetContent'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eget erat condimentum tellus sodales pretium. Duis nec velit cursus, iaculis ex vitae, fermentum magna. Nullam facilisis turpis vitae tempus sagittis.</div></div></div>"
-                
-     //"</div>"
+    var formatedTweet = 
+        "<div class='grid-container-tweet'><div class='boxTweet'><div class='profilePic'></div><div class='usernameData'>@JohnyDeep21</div><div class='firstButton'><div class='posButtons'><i class='fas fa-comment'></i></div></div><div class='secondButton'><div class='posButtons'><i class='fas fa-retweet'></i></div></div><div class='thirdButton'>"+LikeBtn(tweet)+"</div><div class='fourthButton'><div class='posButtons'></div></div><div class='tweetContent'>"+tweet.content +"</div></div></div>"
     return formatedTweet
 }
 
