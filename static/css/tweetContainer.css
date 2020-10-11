@@ -43,14 +43,19 @@
     gap: 0px 0px;
     grid-template-areas:
       ". . ."
-      ". . ."
-      ". . .";
+      "btn2 btn2 btn2"
+      "btn2 btn2 btn2";
     grid-area: otherButtons;
+  }
+  .btn2{
+    grid-area: btn2;
+    width: 95%;
+    margin-left: 5%;
   }
 
   .buttonFormStyle{
     background-color: rgb(29, 161, 242);
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     width: 70%;
     margin-left: 5%;
     padding: 5px 3px 5px 3px;
@@ -72,4 +77,28 @@
 }
 .textareaStyle:focus{
     outline: none;
+}
+.icon1,.icon2,.icon3,.icon4,.icon5{
+  float: left;
+  text-align: center;
+  width: 15%;
+  font-size: 23px;
+  color: rgb(29, 161, 242);
+  font-weight: 200;
+}
+.icon1:hover,.icon2:hover,.icon3:hover,.icon4:hover,.icon5:hover{
+  background-color:rgb(216, 233, 243);
+  border-radius: 50px;
+}
+.icon1{
+  margin-left: 0px;
+}
+::placeholder { 
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+}
+.showMoreLinks{
+  color: rgb(29, 161, 242);
+  padding-left: 4%;
+  margin-top: 50%;
 }

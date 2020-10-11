@@ -7,12 +7,14 @@
     <div class="boxName">
         Main
     </div>
-    <form>
+    <form id="tweet-create-form"  method="POST" action="/createTweet">
+        {% csrf_token%}
         <div class="grid-container-tweet-container">
             <div class="boxForm">
                 <div class="userPic"></div>
                 <div class="formTextarea">
-                    <textarea placeholder="Describe yourself here..." style="resize:none" class="textareaStyle" name="content" ></textarea>
+                    <textarea placeholder="What's on your mind..." style="resize:none" class="textareaStyle" name="content" ></textarea>
+                    <input type='hidden' value='/' name="next"/>
                 </div>
                 <div class="buttonTweet">
                     <div class="tweetButtonForm">
@@ -20,41 +22,105 @@
                     </div>
                 </div>
                 
-                <div class="otherButtons"></div>
+                <div class="otherButtons">
+                    <div class="btn2">
+                        <div class="icon1">
+                            <i class="far fa-image"></i>
+                        </div>
+                        <div class="icon2">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="icon3">
+                            <i class="far fa-smile-beam"></i>
+                        </div>
+                        <div class="icon4">
+                            <i class="far fa-calendar-alt"></i>
+                        </div>
+                        <div class="icon5">
+                            <i class="far fa-bookmark"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </form>
  
-    <div id='tweets'> 
+<div id='tweets'> 
 
-    </div>
+</div>
 </div>
 
 
 
 
 <script>
+function handleFormSubmit(event){
+    event.preventDefault()
+    const myFrom         = event.target
+    const myFormData = new FormData(myForm)
+    console.log(myFrom)
+
+}
+
+const tweetCreate = document.getElementById('tweet-create-form')
+tweetCreate.addEventListener('submit',handleFormSubmit)
+
+const tweetsEl    = document.getElementById('tweets')
+
+
+function loadTweets(tweetsElement) {
+        const xhr = new XMLHttpRequest()
+        const method = 'GET'
+        const url = '/tweetList'
+        const responseTyp = "json"
+        xhr.responseType = responseTyp
+        xhr.open(method, url)
+        xhr.onload = function(){
+        console.log(xhr.response)
+        const serverResponse = xhr.response
+        var listedItems = serverResponse.response
+        var finalTweet  = ""
+        var i;
+        for (i = 0; i < listedItems.length; i++){
+            var tweetObj = listedItems[i]
+            var currItem = formatedTweetsElement(tweetObj)
+                finalTweet += currItem
+        }
+        tweetsElement.innerHTML = finalTweet
+    }
+xhr.send()
+
+}
+loadTweets(tweetsEl)
 
 
 
 
-const tweetsElement = document.getElementById('tweets')
 
 
-const xhr = new XMLHttpRequest()
-const method = 'GET'
-const url = '/tweetList'
-const responseTyp = "json"
+
 
 function handleDidLike(tweet_id, currentCount){
     console.log(tweet_id)
 
 }
 
+
+
+
+
+
+
 function LikeBtn(tweet){
     return "<div class='likeContainer'><div class='heart' onclick=handleDidLike("+tweet.id+","+ tweet.likes+")></div><div class='likesNumber'>"+ tweet.likes+"</div></div>"
    
 }
+
+
+
+
+
+
 
 function formatedTweetsElement(tweet){
     var formatedTweet = 
@@ -62,22 +128,7 @@ function formatedTweetsElement(tweet){
     return formatedTweet
 }
 
-xhr.responseType = responseTyp
-xhr.open(method, url)
-xhr.onload = function(){
-    console.log(xhr.response)
-    const serverResponse = xhr.response
-    var listedItems = serverResponse.response
-    var finalTweet  = ""
-    var i;
-    for (i = 0; i < listedItems.length; i++){
-        var tweetObj = listedItems[i]
-        var currItem = formatedTweetsElement(tweetObj)
-            finalTweet += currItem
-    }
-    tweetsElement.innerHTML = finalTweet
-}
-xhr.send()
+
 
 </script>
 
