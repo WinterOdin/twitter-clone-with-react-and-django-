@@ -55,11 +55,22 @@
 
 <script>
 function handleFormSubmit(event){
-    event.preventDefault()
-    const myFrom         = event.target
-    const myFormData = new FormData(myForm)
-    console.log(myFrom)
 
+    const myForm = event.target
+    const myFormData  = new FormData(myForm)
+    const url         = myForm.getAtrtribute("action")
+    const method      = myForm.getAtrtribute("method")
+    const xhr         = new XMLHttpRequest()
+    xhr.open(method, url )
+    xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "HMLHttpRequest")
+    xhr.setRequestHeader("X-Request-Width", "HMLHttpRequest")
+    xhr.onload = function(){
+        const serverResponse = xhr.response
+        const tweetsEl = document.getElementById("tweets")
+        console.log(xhr.status,serverResponse)
+        loadTweets(tweetsEl) 
+    }
+    xhr.send(myFormData)
 }
 
 const tweetCreate = document.getElementById('tweet-create-form')
@@ -69,14 +80,13 @@ const tweetsEl    = document.getElementById('tweets')
 
 
 function loadTweets(tweetsElement) {
-        const xhr = new XMLHttpRequest()
-        const method = 'GET'
-        const url = '/tweetList'
-        const responseTyp = "json"
-        xhr.responseType = responseTyp
-        xhr.open(method, url)
+        const xhr          = new XMLHttpRequest()
+        const method       = 'GET'
+        const url          = '/tweetList'
+        const responseType = "json"
+        xhr.responseType   = responseType
+        xhr.open(method, url )
         xhr.onload = function(){
-        console.log(xhr.response)
         const serverResponse = xhr.response
         var listedItems = serverResponse.response
         var finalTweet  = ""
@@ -102,6 +112,7 @@ loadTweets(tweetsEl)
 
 function handleDidLike(tweet_id, currentCount){
     console.log(tweet_id)
+    return
 
 }
 

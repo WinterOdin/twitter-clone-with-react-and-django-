@@ -15,9 +15,14 @@ def tweet_create(request):
     
     form = TweetForm(request.POST or None)
     url  = request.POST.get('next') or None
-    print(url)
     if form.is_valid():
+        data = form.save(commit=False)
         form.save()
+        if request.is_ajax():
+           return JsonResponse({data.serialize()}, status=201)
+
+
+
         if url != None and is_safe_url(url, ALLOWED_HOSTS):
             return redirect(url)
         form = TweetForm()
@@ -29,7 +34,7 @@ def tweet_create(request):
 def tweet_list(request):
 
     data_set    = Tweets.objects.all()
-    data_set_list =  [{ "id": x.id, "content" : x.content, "likes":12} for x in data_set ]
+    data_set_list =  [ x.serialize() for x in data_set ]
     context = {
         "response" : data_set_list
     }
