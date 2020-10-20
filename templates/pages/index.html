@@ -13,7 +13,7 @@
             <div class="boxForm">
                 <div class="userPic"></div>
                 <div class="formTextarea">
-                    <textarea placeholder="What's on your mind..." style="resize:none" class="textareaStyle" name="content" ></textarea>
+                    <textarea required="required" placeholder="What's on your mind..." style="resize:none" class="textareaStyle" name="content" ></textarea>
                     <input type='hidden' value='/' name="next"/>
                 </div>
                 <div class="buttonTweet">
@@ -55,28 +55,40 @@
 
 <script>
 function handleFormSubmit(event){
-
-    const myForm = event.target
-    const myFormData  = new FormData(myForm)
-    const url         = myForm.getAtrtribute("action")
-    const method      = myForm.getAtrtribute("method")
-    const xhr         = new XMLHttpRequest()
+    event.preventDefault()
+    const myForm        = event.target
+    const myFormData    = new FormData(myForm)
+    const url           = myForm.getAttribute("action")
+    const method        = myForm.getAttribute("method")
+    const xhr           = new XMLHttpRequest()
+    const responseType  = "json"
+    xhr.responseType = responseType
     xhr.open(method, url )
     xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "HMLHttpRequest")
     xhr.setRequestHeader("X-Request-Width", "HMLHttpRequest")
     xhr.onload = function(){
-        const serverResponse = xhr.response
-        const tweetsEl = document.getElementById("tweets")
-        console.log(xhr.status,serverResponse)
-        loadTweets(tweetsEl) 
+        if (xhr.status === 201){
+            const newTweetJson      = xhr.response
+            const newTweetElement   = formatedTweetsElement(newTweetJson)
+            const firstHtml         = tweetsContainerElement.innerHTML
+            tweetsContainerElement.innerHTML = newTweetElement + firstHtml
+            myForm.reset()
+        }else if (xhr.status === 400){
+            const error = xhr.response
+            console.log(errorJson)
+        }
     }
     xhr.send(myFormData)
 }
 
+
 const tweetCreate = document.getElementById('tweet-create-form')
 tweetCreate.addEventListener('submit',handleFormSubmit)
 
-const tweetsEl    = document.getElementById('tweets')
+const tweetsContainerElement = document.getElementById('tweets')
+
+
+
 
 
 function loadTweets(tweetsElement) {
@@ -99,47 +111,24 @@ function loadTweets(tweetsElement) {
         tweetsElement.innerHTML = finalTweet
     }
 xhr.send()
-
 }
-loadTweets(tweetsEl)
-
-
-
-
-
-
+loadTweets(tweetsContainerElement)
 
 
 function handleDidLike(tweet_id, currentCount){
     console.log(tweet_id)
     return
-
 }
-
-
-
-
-
-
 
 function LikeBtn(tweet){
     return "<div class='likeContainer'><div class='heart' onclick=handleDidLike("+tweet.id+","+ tweet.likes+")></div><div class='likesNumber'>"+ tweet.likes+"</div></div>"
-   
 }
-
-
-
-
-
-
 
 function formatedTweetsElement(tweet){
     var formatedTweet = 
         "<div class='grid-container-tweet'><div class='boxTweet'><div class='profilePic'></div><div class='usernameData'>@JohnyDeep21</div><div class='firstButton'><div class='posButtons'><i class='fas fa-comment'></i></div></div><div class='secondButton'><div class='posButtons'><i class='fas fa-retweet'></i></div></div><div class='thirdButton'>"+LikeBtn(tweet)+"</div><div class='fourthButton'><div class='posButtons'></div></div><div class='tweetContent'>"+tweet.content +"</div></div></div>"
     return formatedTweet
 }
-
-
 
 </script>
 

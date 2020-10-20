@@ -12,20 +12,22 @@ def home(request):
     return render(request, "pages/index.html", status=200)
 
 def tweet_create(request): 
-    
     form = TweetForm(request.POST or None)
     url  = request.POST.get('next') or None
+
     if form.is_valid():
+
         data = form.save(commit=False)
         form.save()
+
         if request.is_ajax():
-           return JsonResponse({data.serialize()}, status=201)
-
-
-
+           return JsonResponse(data.serialize(), status=201)
         if url != None and is_safe_url(url, ALLOWED_HOSTS):
             return redirect(url)
         form = TweetForm()
+    if form.errors:
+        if request.is_ajax():
+            return JsonResponse(form.errors,status=400)
     context = {
         "form" : form,
     }
