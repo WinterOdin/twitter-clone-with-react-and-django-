@@ -2,7 +2,7 @@ from django.http import HttpResponse, Http404, JsonResponse
 from django.shortcuts import render, redirect
 from django.utils.http import is_safe_url
 from django.conf import settings
-
+from .serializers import *
 from .models import *
 from .forms import *
 
@@ -11,27 +11,29 @@ ALLOWED_HOSTS = settings.ALLOWED_HOSTS
 def home(request):
     return render(request, "pages/index.html", status=200)
 
-def tweet_create(request): 
-    form = TweetForm(request.POST or None)
-    url  = request.POST.get('next') or None
 
-    if form.is_valid():
+def tweet_create(request, *args, **kwargs):
+    user = request.user
+    data = request.POST or None
+    serializer = TweetSerializer(data=data)
+    if serializer.is_valid():
+        serializer.save(user=user)
 
-        data = form.save(commit=False)
-        form.save()
+    return JsonResponse({}, status=201)
 
-        if request.is_ajax():
-           return JsonResponse(data.serialize(), status=201)
-        if url != None and is_safe_url(url, ALLOWED_HOSTS):
-            return redirect(url)
-        form = TweetForm()
-    if form.errors:
-        if request.is_ajax():
-            return JsonResponse(form.errors,status=400)
-    context = {
-        "form" : form,
-    }
-    return render( request, 'components/forms.html', context)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def tweet_list(request):
 

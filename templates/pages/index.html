@@ -68,10 +68,11 @@ function handleFormSubmit(event){
     xhr.setRequestHeader("X-Request-Width", "HMLHttpRequest")
     xhr.onload = function(){
         if (xhr.status === 201){
-            const newTweetJson      = xhr.response
-            const newTweetElement   = formatedTweetsElement(newTweetJson)
-            const firstHtml         = tweetsContainerElement.innerHTML
-            tweetsContainerElement.innerHTML = newTweetElement + firstHtml
+            const newTweetJson                  = xhr.response
+            const newTweetElement               = formatedTweetsElement(newTweetJson)
+            const firstHtml                     = tweetsContainerElement.innerHTML
+            tweetsContainerElement.innerHTML    = newTweetElement + firstHtml
+            console.log("xd3")
             myForm.reset()
         }else if (xhr.status === 400){
             const error = xhr.response
@@ -81,9 +82,10 @@ function handleFormSubmit(event){
     xhr.send(myFormData)
 }
 
-
 const tweetCreate = document.getElementById('tweet-create-form')
 tweetCreate.addEventListener('submit',handleFormSubmit)
+
+
 
 const tweetsContainerElement = document.getElementById('tweets')
 
@@ -92,25 +94,26 @@ const tweetsContainerElement = document.getElementById('tweets')
 
 
 function loadTweets(tweetsElement) {
-        const xhr          = new XMLHttpRequest()
-        const method       = 'GET'
-        const url          = '/tweetList'
-        const responseType = "json"
-        xhr.responseType   = responseType
-        xhr.open(method, url )
-        xhr.onload = function(){
+    const xhr          = new XMLHttpRequest()
+    const method       = 'GET'
+    const url          = '/tweetList'
+    const responseType = "json"
+    xhr.responseType   = responseType
+    xhr.open(method, url )
+    xhr.onload = function(){
         const serverResponse = xhr.response
-        var listedItems = serverResponse.response
+        const listedItems = serverResponse.response
         var finalTweet  = ""
         var i;
         for (i = 0; i < listedItems.length; i++){
             var tweetObj = listedItems[i]
             var currItem = formatedTweetsElement(tweetObj)
-                finalTweet += currItem
+            finalTweet += currItem
+            console.log("Xdd1")
         }
         tweetsElement.innerHTML = finalTweet
     }
-xhr.send()
+    xhr.send()
 }
 loadTweets(tweetsContainerElement)
 

@@ -23,10 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'm8coonlx29v5q^=%o8858rqmb&b*wdso(m35yqy(5b&dsn&2_5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
+DEBUG         = True
+MAX_LENGHT    = 256
 ALLOWED_HOSTS = ['127.0.0.1' ]
-
+LOGIN_URL     = "/login"
 
 # Application definition
 
@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tweets'
+    'tweets',
+    'rest_framework',
+
 ]
 
 MIDDLEWARE = [
