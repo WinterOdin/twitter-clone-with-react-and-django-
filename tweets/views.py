@@ -3,8 +3,10 @@ from django.conf import settings
 from django.http import HttpResponse, Http404, JsonResponse
 from django.shortcuts import render, redirect
 from django.utils.http import is_safe_url
+
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view ,permission_classes
+from rest_framework.permissions import IsAuthenticated
 from .serializers import *
 from .models import *
 from .forms import *
@@ -17,6 +19,7 @@ def home(request):
     return render(request, "pages/index.html", status=200)
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def tweet_create(request, *args, **kwargs):
     user = request.user
     serializer = TweetSerializer(data=request.POST)
@@ -58,5 +61,3 @@ def delete_view(request, tweet_id):
     data = data_set.first()
     data.delete()
     return Response({"message": "Tweet removed"}, status=200)
-
-
