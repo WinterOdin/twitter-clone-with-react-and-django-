@@ -6,6 +6,10 @@ from django.conf import settings
 
 MAX_LENGHT = settings.MAX_LENGHT
 
+class TweetLikeSerializer(serializers.Serializer):
+    id     = serializers.IntegerField()
+    action = serializers.CharField()
+
 
 class TweetSerializer(serializers.ModelSerializer):
     class Meta:
