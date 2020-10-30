@@ -46,4 +46,17 @@ def detail_view(request, tweet_id):
     serializer  = TweetSerializer(data_set)
     return Response(serializer.data, status=200)
 
+@api_view(["DELETE", "POST"])
+@permission_classes([IsAuthenticated])
+def delete_view(request, tweet_id):
+    data_set = Tweets.objects.filter(id=tweet_id)
+    if not data_set.exists():
+        return Response({}, status=404)
+    data_set = data_set.filter(user=request.user)
+    if not data_set.exists():
+        return Response({"message": "error"}, status=401)
+    data = data_set.first()
+    data.delete()
+    return Response({"message": "Tweet removed"}, status=200)
+
 
