@@ -1,8 +1,5 @@
 {% extends 'base.html'  %}
 {% block content %}
-
-
-  
 <div class="mainColl">
     <div class="boxName">
         Main
@@ -54,6 +51,25 @@
 
 
 <script>
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+
 function handleFormSubmit(event){
     event.preventDefault()
     const myForm        = event.target
@@ -118,18 +134,43 @@ function loadTweets(tweetsElement) {
 loadTweets(tweetsContainerElement)
 
 
-function handleDidLike(tweet_id, currentCount){
-    console.log(tweet_id)
+function action(tweet_id, currentCount,action){
+
+    const url       = "tweet/action"
+    const method    = "POST"
+   
+    const data      = JSON.stringify({
+        tweet_id      : tweet_id,
+        action        : action
+    })
+    const csrftoken = getCookie('csrftoken');
+    const xhr       = new XMLHttpRequest
+    xhr.open(method, url )
+    xhr.setRequestHeader("Content-Type", "application/json")
+    xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "HMLHttpRequest")
+    xhr.setRequestHeader("X-Request-Width", "HMLHttpRequest")
+    xhr.setRequestHeader("X-CSRFToken", csrftoken)
+    xhr.onload = function(){
+        loadTweets(tweetsContainerElement)
+        console.log(data)
+    }
+
+    xhr.send(data)
     return
 }
 
 function LikeBtn(tweet){
-    return "<div class='likeContainer'><div class='heart' onclick=handleDidLike("+tweet.id+","+ tweet.likes+")></div><div class='likesNumber'>"+ tweet.likes+"</div></div>"
+    return "<div class='likeContainer'><div class='heart' onclick=action("+tweet.id+","+ tweet.likes+",'like')></div><div class='likesNumber'>"+ tweet.likes+"</div></div>"
 }
+
+function RetweetBtn(tweet){
+    return "<i  class='fas fa-retweet retweetHover' onclick=action("+tweet.id+","+ tweet.likes+",'retweet')></i>"
+}
+
 
 function formatedTweetsElement(tweet){
     var formatedTweet = 
-        "<div class='grid-container-tweet'><div class='boxTweet'><div class='profilePic'></div><div class='usernameData'>@JohnyDeep21</div><div class='firstButton'><div class='posButtons'><i class='fas fa-comment'></i></div></div><div class='secondButton'><div class='posButtons'><i class='fas fa-retweet'></i></div></div><div class='thirdButton'>"+LikeBtn(tweet)+"</div><div class='fourthButton'><div class='posButtons'></div></div><div class='tweetContent'>"+tweet.content +"</div></div></div>"
+        "<div id='tweet-"+tweet.id+"' class='grid-container-tweet'><div class='boxTweet'><div class='profilePic'></div><div class='usernameData'>@JohnyDeep21</div><div class='firstButton'><div class='posButtons'><i class='fas fa-comment'></i></div></div><div class='secondButton'><div class='posButtons'>"+RetweetBtn(tweet)+"</div></div><div class='thirdButton'>"+LikeBtn(tweet)+"</div><div class='fourthButton'><div class='posButtons'></div></div><div class='tweetContent'>"+tweet.content +"</div></div></div>"
     return formatedTweet
 }
 

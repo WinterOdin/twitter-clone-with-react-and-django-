@@ -15,6 +15,9 @@ body{
   letter-spacing: -1px;
   margin-top: 1px; 
 }
+.retweetHover:hover{
+  color: aqua;
+}
 .heart {
     cursor: pointer;
     height: 50px;

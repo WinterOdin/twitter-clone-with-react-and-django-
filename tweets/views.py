@@ -64,23 +64,31 @@ def delete_view(request, tweet_id):
     data.delete()
     return Response({"message": "Tweet removed"}, status=200)
 
-@api_view(["DELETE", "POST"])
-def like_view(request, tweet_id):
-    serializer = TweetLikeSerializer(request.POST)
-    if serializer.is_valid(raise_exception=True):
+@api_view(["POST"])
+def like_view(request,*args, **kwargs):
+ 
+    serializer = TweetLikeSerializer(data=request.data)
+    if serializer.is_valid(raise_exception = True):
         data     = serializer.validated_data
-        tweet_id = data.get("id")
+        tweet_id = data.get("tweet_id")
         action   = data.get("action")
-
         data_set   = Tweets.objects.filter(id=tweet_id)
         if not data_set.exists():
             return Response({}, status=404)
         data = data_set.first()
+        print(data.action)
         if action == "like":
             data.likes.add(request.user)
+            serializer = TweetSerializer(data)
+            return Response(serializer.data, status=200)
         elif  action == "unlike":
             data.likes.remove(request.user)
-        elif action: # 4 08
-            pass
-   
+            return Response({'unliked'}, status=200)
+        elif action == "retweet": 
+            parent_tweet = data
+            tweet        = Tweets.objects.create(user =  request.user, parent=parent_tweet)
+            serializer = TweetSerializer(tweet)
+            return Response(serializer.data, status=200)
+
+
     return Response({"message": "Tweet removed"}, status=200)
