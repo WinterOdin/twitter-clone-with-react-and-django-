@@ -18,11 +18,6 @@ class Tweets(models.Model):
     time    = models.DateTimeField(auto_now_add=True)
     class Meta:
         ordering = ['-id']
-        
-    def serialize(self):
-        return{
-            'id'        : self.id,
-            'content'   : self.content,
-            'likes'     : 0
-        }
-
+    @property   
+    def is_retweet(self):
+        return self.parent !=None

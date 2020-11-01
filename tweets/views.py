@@ -22,7 +22,7 @@ def home(request):
 @permission_classes([IsAuthenticated])
 def tweet_create(request, *args, **kwargs):
     user = request.user
-    serializer = TweetSerializer(data=request.POST)
+    serializer = TweetCreateSerializer(data=request.POST)
     if serializer.is_valid(raise_exception=True):
         data_chunk = serializer.save(user= user)
         return Response(serializer.data, status=201)
@@ -72,23 +72,19 @@ def like_view(request,*args, **kwargs):
         data     = serializer.validated_data
         tweet_id = data.get("tweet_id")
         action   = data.get("action")
+        content  = data.get("content")
         data_set   = Tweets.objects.filter(id=tweet_id)
         if not data_set.exists():
             return Response({}, status=404)
         data = data_set.first()
-        print(data.action)
         if action == "like":
             data.likes.add(request.user)
             serializer = TweetSerializer(data)
             return Response(serializer.data, status=200)
         elif  action == "unlike":
             data.likes.remove(request.user)
-            return Response({'unliked'}, status=200)
         elif action == "retweet": 
-            parent_tweet = data
-            tweet        = Tweets.objects.create(user =  request.user, parent=parent_tweet)
-            serializer = TweetSerializer(tweet)
+            new_tweet        = Tweets.objects.create(user =  request.user, parent=data,content= content)
+            serializer = TweetSerializer(new_tweet)
             return Response(serializer.data, status=200)
-
-
-    return Response({"message": "Tweet removed"}, status=200)
+    return Response({}, status=200)
